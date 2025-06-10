@@ -153,12 +153,12 @@ def main():
                         help="proc_{i}_S.csv & proc_{i}_A.csv Path")
     parser.add_argument('--max_k',       type=int, default=200,
                         help="DP-GMM highest threshold")
-    parser.add_argument('--dp_prior',    type=float, default=1e-2,
+    parser.add_argument('--dp_prior',    type=float, default=1e-15,
                         help="DP-GMM concentration prior")
     parser.add_argument('--ae_epochs',   type=int, default=30)
     parser.add_argument('--batch_size',  type=int, default=128)
     parser.add_argument('--lr_nn',       type=float, default=1e-3)
-    parser.add_argument('--threshold', type=float, default=0.001,
+    parser.add_argument('--threshold', type=float, default=1e-5,
                         help="keep weight > threshold as ")
     parser.add_argument('--output_pref', type=str, default='robust')
     parser.add_argument('--run_frac',   type=float, default=0.5,
@@ -198,7 +198,7 @@ def main():
         n_components=args.max_k,
         covariance_type='diag',
         weight_concentration_prior_type='dirichlet_process',
-        weight_concentration_prior=1e-15,
+        weight_concentration_prior=args.dp_prior,
         max_iter=1000,
         random_state=0
     )
@@ -207,7 +207,7 @@ def main():
     print(np.unique(labels))
     weights = dp.weights_          # shape (max_k,)
 
-    active_by_weight = np.where(weights > 0)[0]
+    active_by_weight = np.where(weights > args.threshold)[0]
 
     n_runs = len(runs_M)
     robust = []
