@@ -25,6 +25,8 @@ conda create -n deepcica python=3.9
 conda activate deepcica
 pip install -r requirements.txt
 
+---
+
 If CUDA is available, the PyTorch wheel will automatically use the GPU; otherwise
 the pipeline runs on CPU.
 
