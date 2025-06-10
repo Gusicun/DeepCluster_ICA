@@ -30,6 +30,7 @@ If CUDA is available, the PyTorch wheel will automatically use the GPU; otherwis
 the pipeline runs on CPU.
 
 ## One-liner usage
+```
 python dp_gmm.py \
   --dir ica_runs \
   --max_k 200 \
@@ -37,13 +38,18 @@ python dp_gmm.py \
   --threshold 1e-8 \
   --run_frac 0.5 \
   --output_pref robust
+```
 
 ## Outputs
+```
 ica_runs/robust_M_consensus.csv   # genes × K robust clusters
 ica_runs/robust_A_consensus.csv   # samples × K
-
+```
+## Options
+```
 python plot_dims.py --runs_dir ica_runs      # visualise component counts vs. dimension
 python metrics_plot.py                       # quality metrics (edit paths inside script)
+```
 
 # Key command-line options (dp_gmm.py)
 | flag            | default | purpose                                                   |
@@ -59,6 +65,7 @@ python metrics_plot.py                       # quality metrics (edit paths insid
 
 ## Citation
 If you use DeepCluster-ICA in your research, please cite:
+```
 @misc{DeepClusterICA2025,
   title        = {DeepCluster-ICA},
   author       = {Your Name},
@@ -66,5 +73,5 @@ If you use DeepCluster-ICA in your research, please cite:
   year         = {2025},
   note         = {v1.0.0}
 }
-
+```
 
